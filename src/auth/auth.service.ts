@@ -1,8 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {Injectable, InternalServerErrorException, UnauthorizedException} from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { LoginUserDto } from './dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import {RegisterUserDto} from "./dto/register-user.dto";
 
 type SignInData = { userId: number, email: string }
 type AuthResult = { accessToken: string, userId: number, email: string }
@@ -13,6 +14,28 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
+
+  async signup(payload: RegisterUserDto): Promise<any> {
+    try {
+      const user = await this.userService.findByEmail(payload.email);
+
+      if (user) {
+        return `User already exists with email ${user.email}`;
+      }
+
+      const { password, ...rest } = payload;
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const updatedPayload = { ...rest, password: hashedPassword };
+
+      return await this.userService.create(updatedPayload);
+
+    } catch (error) {
+      console.error('error occurred: ', error);
+      throw new InternalServerErrorException();
+    }
+  }
 
   async validateUser(credentials: LoginUserDto): Promise<SignInData> {
     const user = await this.userService.findByEmail(credentials.email);

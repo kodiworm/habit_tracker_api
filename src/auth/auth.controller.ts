@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-user.dto';
 import { AuthGuard } from './guards/auth.guard';
 import { PassportLocalGuard } from './guards/passport-local.guard';
+import {RegisterUserDto} from "./dto/register-user.dto";
 
 @Controller('auth')
 export class AuthController {
@@ -12,6 +13,12 @@ export class AuthController {
   @Post('login')
   login(@Body() credentials: LoginUserDto) {
     return this.authService.authenticate(credentials);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Post('register')
+  register(@Body() data: RegisterUserDto) {
+    return this.authService.signup(data);
   }
 
   @HttpCode(HttpStatus.OK)

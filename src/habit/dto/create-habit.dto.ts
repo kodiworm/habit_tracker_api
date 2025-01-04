@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {IsEnum, IsNotEmpty, IsString} from 'class-validator';
+import {Frequency} from "../../core/common/enums";
 
 export class CreateHabitDto {
   @IsNotEmpty()
@@ -8,6 +9,7 @@ export class CreateHabitDto {
   @IsString()
   description: string;
 
-  @IsNumber()
-  frequency: number;
+  @IsNotEmpty()
+  @IsEnum(Frequency)
+  frequency: Frequency;
 }

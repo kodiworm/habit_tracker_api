@@ -7,9 +7,16 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class HabitService {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(createHabitDto: CreateHabitDto) {
+  create(createHabitDto: CreateHabitDto, userId:number) {
+    const { name, description, frequency } = createHabitDto;
+
     return this.prisma.habit.create({
-      data: createHabitDto,
+      data: {
+        name,
+        description,
+        frequency,
+        userId,
+      },
     });
   }
 

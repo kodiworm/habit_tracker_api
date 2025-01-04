@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { HabitModule } from './habit/habit.module';
+import { HabitProgressModule } from './habit-progress/habit-progress.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { HabitModule } from './habit/habit.module';
     AuthModule,
     UserModule,
     HabitModule,
+    HabitProgressModule,
   ],
   controllers: [AppController],
   providers: [AppService],
