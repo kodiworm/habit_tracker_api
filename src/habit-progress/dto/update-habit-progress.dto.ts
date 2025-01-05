@@ -1,4 +1,15 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateHabitProgressDto } from './create-habit-progress.dto';
+import { IsBoolean, IsDateString, IsOptional, IsString } from 'class-validator';
 
-export class UpdateHabitProgressDto extends PartialType(CreateHabitProgressDto) {}
+export class UpdateHabitProgressDto {
+    @IsOptional()
+    @IsDateString()
+    date?: string;
+
+    @IsOptional()
+    @IsBoolean()
+    status?: boolean;
+
+    @IsOptional()
+    @IsString()
+    notes?: string;
+}

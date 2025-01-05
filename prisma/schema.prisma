@@ -45,7 +45,8 @@ model HabitProgress {
 }
 
 enum Frequency {
-  Daily
-  Weekly
-  Monthly
+  daily
+  weekly
+  monthly
+  quarterly
 }

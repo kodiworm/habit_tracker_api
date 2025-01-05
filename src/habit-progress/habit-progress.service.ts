@@ -1,26 +1,63 @@
 import { Injectable } from '@nestjs/common';
 import { CreateHabitProgressDto } from './dto/create-habit-progress.dto';
 import { UpdateHabitProgressDto } from './dto/update-habit-progress.dto';
+import {PrismaService} from "../../prisma/prisma.service";
 
 @Injectable()
 export class HabitProgressService {
-  create(createHabitProgressDto: CreateHabitProgressDto) {
-    return 'This action adds a new habitProgress';
+  constructor(private prisma: PrismaService) {}
+
+  // Create habit progress
+  async create(createHabitProgressDto: CreateHabitProgressDto) {
+    const { habitId, date, status, notes } = createHabitProgressDto;
+    return this.prisma.habitProgress.create({
+      data: {
+        habitId,
+        date,
+        status,
+        notes,
+      },
+    });
   }
 
-  findAll() {
-    return `This action returns all habitProgress`;
+  // Get progress for a specific habit
+  async getHabitProgress(habitId: number) {
+    return this.prisma.habitProgress.findMany({
+      where: {
+        habitId,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} habitProgress`;
+  // Get all progress for a user (across all habits)
+  async getUserProgress(userId: number) {
+    return this.prisma.habitProgress.findMany({
+      where: {
+        habit: {
+          userId,
+        },
+      },
+      include: {
+        habit: true, // Include habit details if needed
+      },
+    });
   }
 
-  update(id: number, updateHabitProgressDto: UpdateHabitProgressDto) {
-    return `This action updates a #${id} habitProgress`;
+  // Update habit progress
+  async update(
+      progressId: number,
+      updateHabitProgressDto: UpdateHabitProgressDto,
+  ) {
+    return this.prisma.habitProgress.update({
+      where: { id: progressId },
+      data: updateHabitProgressDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} habitProgress`;
+  // Delete habit progress
+  async delete(progressId: number) {
+    return this.prisma.habitProgress.delete({
+      where: { id: progressId },
+    });
   }
 }

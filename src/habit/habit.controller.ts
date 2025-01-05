@@ -15,9 +15,11 @@ export class HabitController {
     return this.habitService.create(createHabitDto, userId);
   }
 
+  @UseGuards(AuthGuard)
   @Get()
-  findAll() {
-    return this.habitService.findAll();
+  findAll(@Request() req) {
+    const userId = req.user.userId;
+    return this.habitService.findAll(userId);
   }
 
   @Get(':id')

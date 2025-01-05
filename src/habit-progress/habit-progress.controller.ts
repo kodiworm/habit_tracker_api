@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards} from '@nestjs/common';
 import { HabitProgressService } from './habit-progress.service';
 import { CreateHabitProgressDto } from './dto/create-habit-progress.dto';
 import { UpdateHabitProgressDto } from './dto/update-habit-progress.dto';
+import {AuthGuard} from "../auth/guards/auth.guard";
 
 @Controller('habit-progress')
 export class HabitProgressController {
@@ -12,14 +13,16 @@ export class HabitProgressController {
     return this.habitProgressService.create(createHabitProgressDto);
   }
 
+  @UseGuards(AuthGuard)
   @Get()
-  findAll() {
-    return this.habitProgressService.findAll();
+  findUserProgress(@Request() req) {
+    const userId = req.user.userId;
+    return this.habitProgressService.getUserProgress(userId);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.habitProgressService.findOne(+id);
+    return this.habitProgressService.getHabitProgress(+id);
   }
 
   @Patch(':id')
@@ -29,6 +32,6 @@ export class HabitProgressController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.habitProgressService.remove(+id);
+    return this.habitProgressService.delete(+id);
   }
 }

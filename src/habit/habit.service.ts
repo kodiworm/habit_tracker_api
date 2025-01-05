@@ -20,8 +20,10 @@ export class HabitService {
     });
   }
 
-  findAll() {
-    return this.prisma.habit.findMany();
+  findAll(userId:number) {
+    return this.prisma.habit.findMany({
+      where: { userId },
+    });
   }
 
   findOne(id: number) {
@@ -41,10 +43,16 @@ export class HabitService {
       throw new Error(`Habit with ID #${id} not found`);
     }
 
+    const { name, description, frequency } = updateHabitDto;
+
     // Proceed to update the habit
     const updatedHabit = await this.prisma.habit.update({
       where: { id },
-      data: updateHabitDto
+      data: {
+        name,
+        description,
+        frequency
+      }
     });
 
     // Return the updated habit or a meaningful message

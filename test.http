@@ -2,7 +2,7 @@ POST http://localhost:3031/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "test@email.com",
+  "email": "test2@email.com",
   "password": "password"
 }
 
@@ -13,8 +13,8 @@ POST http://localhost:3031/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "Test Account2",
-  "email": "test2@email.com",
+  "name": "Test Account",
+  "email": "test@email.com",
   "password": "password"
 }
 
@@ -34,26 +34,26 @@ Content-Type: application/json
 
 GET http://localhost:3030/api/auth/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidGVzdEBlbWFpbC5jb20iLCJpYXQiOjE3MzYwMjUwOTQsImV4cCI6MTczNjExMTQ5NH0.VOiPo9Uo0ABn8p6qXhbAFYaW30W1MoFkwdopadZ1f2w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoidGVzdEBlbWFpbC5jb20iLCJpYXQiOjE3MzYwMzIyMTIsImV4cCI6MTczNjExODYxMn0.RG608dhqNlP9cZWdR7aAMrOtGn_IB-keRVx5de2QRh8
 
 
 ###
 
 GET http://localhost:3031/api/habit
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidGVzdEBlbWFpbC5jb20iLCJpYXQiOjE3MzYwMjUwOTQsImV4cCI6MTczNjExMTQ5NH0.VOiPo9Uo0ABn8p6qXhbAFYaW30W1MoFkwdopadZ1f2w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoidGVzdEBlbWFpbC5jb20iLCJpYXQiOjE3MzYwMzIyMTIsImV4cCI6MTczNjExODYxMn0.RG608dhqNlP9cZWdR7aAMrOtGn_IB-keRVx5de2QRh8
 
 
 ###
 
 POST http://localhost:3031/api/habit
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidGVzdEBlbWFpbC5jb20iLCJpYXQiOjE3MzYwMjUwOTQsImV4cCI6MTczNjExMTQ5NH0.VOiPo9Uo0ABn8p6qXhbAFYaW30W1MoFkwdopadZ1f2w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoidGVzdDJAZW1haWwuY29tIiwiaWF0IjoxNzM2MDMyMzI0LCJleHAiOjE3MzYxMTg3MjR9.wZR2c6uyWU8SnAqBAjvDqUeSFzYsSgzR-avxNy7zJcU
 
 {
-  "name": "habit2",
+  "name": "habit Test2",
   "description": "habit description2",
-  "frequency": 1
+  "frequency": "monthly"
 }
 
 ###
